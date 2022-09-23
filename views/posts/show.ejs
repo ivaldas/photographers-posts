@@ -1,0 +1,40 @@
+<% layout('layouts/boilerplate') %>
+
+    <div class="container-fluid">
+        <div class="row">
+            <div class="card mx-auto my-5" style="width: 32rem;">
+                <div class="card-body">
+                    <% if(currentUser && photographer.photographer.equals(currentUser._id)) { %>
+                    <a href="/photographers/<%= photographer._id %>/<%= post._id %>/edit">Edit Post</a>
+                    <% } %>
+                    <h3 class="text-center card-title"><b>Photographer: </b><br><em><%= photographer.name %></em><hr></h3>
+                    <div class="img-thumbnail mb-3">
+                        <img src=<%= post.image %>  class="card-img-top img-fluid" alt="...">
+                        <p class="text-center card-text my-1"><em>"<%= post.title %>"</em></p>
+                    </div>
+                    <% for(let comment of postComments.comments) { %>
+                        <div class="card mb-3">
+                            <div class="card-body">
+                                <% if(currentUser && comment.author.equals(currentUser._id)) { %>
+                                <form class="d-grid gap-2 d-md-flex justify-content-end" action="/photographers/<%= photographer._id %>/<%= post._id %>/<%= comment._id %>?_method=DELETE" method="post">
+                                    <a href="/photographers/<%= photographer._id %>/<%= post._id %>/<%= comment._id %>/edit">Edit</a>
+                                    <button type="submit" class="btn btn-outline-danger btn-modified btn-sm">Delete</button>
+                                </form>
+                                <% } %>
+                                <p class="text-center card-text"><em>"<%= comment.comment %>"</em></p>
+                                <h4 class="text-end blockquote-footer"> <%= comment.author.username %></h4>
+                            </div>
+                        </div>
+                        <hr>
+                    <% } %>
+                    <form class="d-grid gap-2 d-md-flex justify-content-around" action="/photographers/<%= photographer._id %>/<%= post._id %>?_method=DELETE" method="post">
+                        <a class="btn btn-modified btn-outline-secondary btn-sm" href="/photographers/<%= photographer._id %>/" role="button">Back to <%= photographer.name %>'s Posts</a>
+                        <a class="btn btn-modified btn-outline-warning btn-sm" href="/photographers/<%= photographer._id %>/<%= post._id %>/new" role="button">Leave a  Coment</a>
+                        <% if(currentUser && photographer.photographer.equals(currentUser._id)) { %>
+                        <button type="submit" class="btn btn-outline-danger btn-modified btn-sm">Delete <%= photographer.name %>'s Post</button>
+                        <% } %>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>

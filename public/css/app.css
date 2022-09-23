@@ -1,0 +1,40 @@
+/* body {
+    padding-top: 70px;
+} */
+
+/* h1 {
+    text-align: center;
+} */
+/* h3 {
+    text-align: center;
+} */
+
+.navbar-modified {
+    background: #2c3e50;
+}
+
+.img-thumbnail.custom-height-allcomments {
+    height: 21rem;
+}
+.img-thumbnail.custom-height-photogr {
+    height: 75%;
+}
+.img-thumbnail .btn-modified {
+    color:#2c3e50;
+}
+
+.btn.btn-modified{
+    color: #2c3e50;
+}
+
+.footer {
+    color:#2c3e50;
+}
+
+/* .carousel {
+    width: 100%
+} */
+
+/* .commentarea {
+    height: 100px;
+} */

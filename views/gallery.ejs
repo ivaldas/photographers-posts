@@ -1,0 +1,15 @@
+<% layout('layouts/boilerplate') %>
+    <div class="container-fluid">
+        <%- include('partials/carousel') %> 
+        <div class="row">
+            <% for(let post of posts) { %>
+                <div class="col-sm-12 col-md-6 col-lg-6 col-xl-4 col-xxl-4">
+                    <div class="img-thumbnail mb-3">
+                        <span><b>Photographer:</b> <em><%= post.photographer.name %></em></span>
+                        <a href="<%= post.image %>"><img class="img-fluid" src="<%= post.image %>"></a>
+                        <a class="btn btn-modified btn-outline-secondary btn-sm" href="/photographers/<%= post.photographer._id %>/<%= post._id %>/new" role="button">Leave a comment</a>
+                    </div>
+                </div>
+            <% } %>
+        </div>
+    </div>

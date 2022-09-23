@@ -1,0 +1,39 @@
+<% layout('layouts/boilerplate') %>
+
+<div class="container-fluid">
+  <div class="row mx-2">
+      <% for(let post of posts) { %>
+        <!-- <div class="card my-3 col-sm-6 col-md-5 col-lg-4 col-xl-4 col-xxl-3"> -->
+        <div class="card my-3 col-sm-12 col-md-6 col-lg-4 col-xl-3 col-xxl-3">
+          <% let photographer = postPhotographer.find(id => id.photographer._id.valueOf() === post.photographer.valueOf()) %>
+          <% if(photographer) { %>
+            <h3 class="text-center my-2 card-title"><b>Comments for</b> <em><%= photographer.photographer.name %>'s</em>  <b>photo:</b></h3>
+          <% } %>
+          <div class="img-thumbnail custom-height-allcomments">
+            <img src=<%= post.image %>  class="card-img-top img-fluid" alt="...">
+            <p class="card-body text-center card-text"><em>"<%= post.title %>"</em></p>
+          </div>
+          <div class="card-body">
+                <% for(let comment of post.comments) { %>
+                  <div class="card mb-3">
+                    <div class="card-body">
+                      <% if(currentUser && comment.author.equals(currentUser._id)) { %>
+                        <form class="d-grid gap-2 d-md-flex justify-content-end" action="/photographers/<%= post.photographer %>/<%= post._id %>/<%= comment._id %>?_method=DELETE" method="post">
+                          <a href="photographers/<%= post.photographer %>/<%= post._id %>/<%= comment._id %>/edit">Edit</a>
+                            <button type="submit" class="btn btn-outline-danger btn-modified btn-sm">Delete</button>
+                        </form>
+                      <% } %>
+                        <p class="text-center card-text"><em>"<%= comment.comment %>"</em></p>
+                        <h4 class="text-end blockquote-footer"> <%= comment.author.username %></h4>
+                    </div>
+                </div>
+                <hr>
+                <% } %>
+          </div>
+          <div class="d-grid gap-2 d-md-flex justify-content-md-end my-2">
+            <a class="btn btn-modified btn-outline-secondary btn-sm" href="/photographers/<%= post.photographer %>/<%= post._id %>/new" role="button">Leave a comment</a>
+          </div>
+        </div>
+      <% } %>
+    </div>
+  </div>

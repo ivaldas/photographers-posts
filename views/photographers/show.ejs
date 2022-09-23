@@ -1,0 +1,48 @@
+<% layout('layouts/boilerplate') %>
+
+  <div class="container-fluid">
+    <div class="row">
+      <div class="card mx-auto my-3" style="width: 25rem;">
+        <div class="card-body">
+          <% if(currentUser && photographer.photographer.equals(currentUser._id)) { %>
+          <a href="/photographers/<%= photographer._id %>/edit">Edit Photographer</a>
+          <% } %> 
+          <h3 class="my-2 text-center card-title"><b>Photographer: </b><br><em><%= photographer.name %></em></h3>
+          <div class="img-thumbnail">
+            <img src=<%= photographer.image %>  class="card-img-top img-fluid" alt="...">
+            <p class="card-body card-text text-center"><em>"<%= photographer.description %>"</em></p>
+          </div>
+          <div class="card-body">
+            <p class="text-center card-text"><b>Subscribers: </b><%= photographer.subscribers %></p>
+          </div>
+          <form class="d-grid gap-2 d-md-flex justify-content-around" action="/photographers/<%= photographer._id %>?_method=DELETE" method="post">
+            <a class="btn btn-modified btn-outline-secondary btn-sm" href="/photographers" role="button">Back to Photographers</a>
+            <% if(currentUser && photographer.photographer.equals(currentUser._id)) { %> 
+            <a class="btn btn-modified btn-outline-success btn-sm" href="/photographers/<%= photographer._id %>/new" role="button">Make a New Posts</a>
+            <button type="submit" class="btn btn-outline-danger btn-modified btn-sm">Delete Photographer</button>
+            <% } %> 
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <div class="container-fluid">
+    <div class="row mx-3">
+      <% for(let post of photographer.posts) { %>
+        <div class="card py-3 my-3 col-sm-12 col-md-6 col-lg-6 col-xl-4 col-xxl-4">
+          <div class="card-body">
+            <div class="img-thumbnail">
+              <a href=<%= post.image %>><img src=<%= post.image %>  class="card-img-top img-fluid" alt="..."></a>
+              <div class="card-body">
+                <p class="card-text text-center"><em>"<%= post.title %>"</em></p>
+              </div>
+            </div>
+          </div>
+          <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+            <a class="btn btn-modified btn-outline-secondary btn-sm" href="/photographers/<%= photographer._id %>/<%= post._id %>" role="button">View Post</a>
+          </div>
+        </div>
+      <% } %>
+    </div>
+  </div>

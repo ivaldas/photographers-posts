@@ -1,0 +1,29 @@
+<% layout('layouts/boilerplate') %>
+
+    <div class="container-fluid my-auto">
+        <div class="row">
+            <div class="card mx-auto" style="width: 30rem;">
+                <div class="card-body">
+                    <h4 class="card-title text-center">Make a New Comment for <%= photographer.name %>'s Photo</h4>
+                    <img src=<%= post.image %>  class="card-img-top img-fluid" alt="...">
+                    <form action="/photographers/<%= photographer._id %>/<%= post._id %>" method="post" class="validated-form" novalidate>
+                        <!-- <div class="input-group mt-3">
+                            <label for="username"></label>
+                            <input type="text" name="comment[username]" id="username" class="form-control" placeholder="username" aria-label="username" required>
+                            <div class="valid-feedback">Looks Good</div>
+                        </div> -->
+                        <div class="input-group-lg mb-3">
+                            <label for="comment"></label>
+                            <textarea class="form-control card-text" name="comment[comment]" id="comment" placeholder="Write Your Comment" aria-label="comment" required></textarea>
+                            <div class="valid-feedback">Looks Good</div>
+                        </div>
+                        <div class="d-grid gap-2 d-md-flex justify-content-around">
+                            <a class="btn btn-modified btn-outline-secondary btn-sm" href="/photographers/<%= photographer._id %>/<%= post._id %>" role="button">Back to <%= photographer.name %>'s Post</a>
+                            <a class="btn btn-modified btn-outline-warning btn-sm" href="/comments" role="button">Back to All Comments</a>
+                            <button type="submit" value="Submit" class="btn btn-outline-success btn-modified btn-sm">Post Your Comment</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>

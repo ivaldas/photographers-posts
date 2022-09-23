@@ -1,0 +1,24 @@
+<% layout('layouts/boilerplate') %>
+
+  <div class="container-fluid">
+    <div class="row mx-3">
+      <% for(let photographer of photographers) { %>
+        <div class="card my-3 col-sm-12 col-md-6 col-lg-4 col-xl-4 col-xxl-4">
+          <!-- <div class="card mx-auto mb-4" style="width: 25rem;"> -->
+          <!-- <div class="card-body"> -->
+            <h3 class="my-2 text-center card-title"><b>Photographer: </b><br><em><%= photographer.name %></em></h3>
+            <div class="img-thumbnail custom-height-photogr">
+              <a href=<%= photographer.image %>><img src=<%= photographer.image %>  class="card-img-top img-fluid" style="height: 83%;" alt="..."></a>
+              <p class="card-body text-center card-text"><em>"<%= photographer.description %>"</em></p>
+            </div>
+            <div class="card-body">
+              <p class="text-center card-text"><b>Subscribers: </b><%= photographer.subscribers %></p>
+            </div>
+            <div class="d-grid gap-2 d-md-flex justify-content-md-end my-2">
+              <a class="btn btn-modified btn-outline-secondary btn-lg" href="/photographers/<%= photographer._id %>" role="button">Posts</a>
+            </div>
+          <!-- </div> -->
+        </div>
+      <% } %>
+    </div>
+  </div>
